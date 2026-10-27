@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumiar Aventura — Rafting, Cachoeiras e Trilhas desde 1990</title>
+<meta name="description" content="Rafting, canoagem, rapel, trekking, arvorismo-canopy, cachoeirismo e treinamento empresarial em Lumiar, Nova Friburgo. 35 anos guiando aventuras com segurança na Serra Fluminense.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--forest-950:#0d1f16; --forest-800:#163829; --forest-600:#245c40;
+--river-500:#2e7d8c; --river-300:#7fc4cf;
+--stone-100:#f2ece0; --stone-200:#e7ddc9; --stone-700:#463d31;
+--amber-500:#e2a53d; --amber-400:#f0bd5f; --white:#fdfaf4;
+--display:'Fjalla One', sans-serif;
+--body:'Work Sans', sans-serif;
+--mono:'IBM Plex Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+body{ font-family:var(--body); background:var(--stone-100); color:var(--stone-700); line-height:1.5; overflow-x:hidden; }
+img,svg{display:block;max-width:100%;} a{color:inherit;text-decoration:none;}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:0.01em;}
+.eyebrow{ font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--river-500); }
+.container{max-width:1120px;margin:0 auto;padding:0 24px;}
+.btn{ display:inline-flex;align-items:center;gap:8px; font-family:var(--mono);font-size:0.85rem;font-weight:600; letter-spacing:0.02em; padding:14px 26px;border-radius:2px; border:1.5px solid transparent; cursor:pointer;transition:transform .18s ease, background .18s ease, color .18s ease; }
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--amber-500);color:var(--forest-950);} .btn-primary:hover{background:var(--amber-400);}
+.btn-ghost{border-color:rgba(253,250,244,0.4);color:var(--white);} .btn-ghost:hover{border-color:var(--white);background:rgba(253,250,244,0.08);}
+/* NAV */
+header{ position:fixed;top:0;left:0;right:0;z-index:50; padding:18px 0; transition:background .3s ease, padding .3s ease, box-shadow .3s ease; }
+header.scrolled{background:rgba(13,31,22,0.92);backdrop-filter:blur(6px);padding:12px 0;box-shadow:0 2px 20px rgba(0,0,0,0.15);}
+nav{display:flex;justify-content:space-between;align-items:center;}
+.logo{display:flex;align-items:center;}
+.logo img{height:44px;width:auto;display:block;}
+.logo span{color:var(--amber-500);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--stone-200);transition:color .2s;}
+.nav-links a:hover{color:var(--amber-500);}
+.nav-cta{display:none;} @media(min-width:720px){.nav-cta{display:inline-flex;}}
+@media(max-width:719px){.nav-links{display:none;}}
+/* HERO */
+.hero{ position:relative; min-height:100vh; display:flex;align-items:flex-end; background:linear-gradient(rgba(13,31,22,0.55), rgba(13,31,22,0.93)), url('fotos/web/g0023392.jpg') center/cover no-repeat; color:var(--white); overflow:hidden; padding-bottom:90px; }
+/* HERO COM VÍDEO NO SCROLL: o topo fica preso e o scroll escolhe o quadro do vídeo */
+.hero-scroll{position:relative;}
+.hero-scroll .hero{position:sticky;top:0;height:100vh;min-height:0;}
+.hero-seq{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(rgba(13,31,22,0.45), rgba(13,31,22,0.55) 50%, rgba(13,31,22,0.93));}
+.hero-track{height:120vh;}
+.hero-contours{position:absolute;inset:0;opacity:0.5;}
+.hero-river{position:absolute;inset:0;}
+.hero-inner{position:relative;z-index:2;width:100%;}
+.hero-tag{display:flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--river-300);}
+.hero-tag .line{width:36px;height:1px;background:var(--river-300);}
+.hero h1{ font-size:clamp(2.6rem, 7vw, 5.4rem); line-height:0.98; max-width:20ch; color:var(--white); }
+.hero h1 em{font-style:normal;color:var(--amber-500);}
+.hero p{ margin-top:22px;max-width:46ch; font-size:1.05rem;color:var(--stone-200); }
+.hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+/* CELULAR: o texto do topo nunca passa por baixo da logo */
+@media(max-width:719px){
+.hero{padding-top:92px;padding-bottom:40px;}
+.hero-scroll .hero{height:100vh;height:100svh;}
+.hero-tag{margin-bottom:14px;}
+.hero h1{font-size:clamp(2.1rem, 9.5vw, 2.6rem);}
+.hero p{margin-top:16px;font-size:0.95rem;}
+.hero-actions{margin-top:24px;gap:10px;}
+.hero-actions .btn{padding:12px 20px;}
+}
+/* STATS STRIP */
+.stats{ background:var(--forest-950); border-top:1px solid rgba(253,250,244,0.1); }
+.stats-grid{ display:grid;grid-template-columns:repeat(2,1fr); gap:0; }
+@media(min-width:720px){.stats-grid{grid-template-columns:repeat(4,1fr);}}
+.stat{ padding:26px 24px;border-left:1px solid rgba(253,250,244,0.1); }
+.stat:first-child{border-left:none;}
+.stat .num{font-family:var(--mono);font-size:1.9rem;font-weight:600;color:var(--amber-500);}
+.stat .label{font-size:0.78rem;color:var(--stone-200);margin-top:4px;}
+/* SECTION HEADS */
+.section{padding:110px 0;}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(2rem,4vw,2.9rem);color:var(--forest-950);margin-top:10px;}
+.section-head p{margin-top:14px;color:var(--stone-700);opacity:0.85;font-size:1.02rem;}
+/* RIVER PATH — signature element */
+.river-path-wrap{position:relative;}
+.river-line{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);z-index:0;}
+.river-line svg{width:100%;height:100%;}
+
+.activities{ display:grid;gap:28px;grid-template-columns:1fr;position:relative;z-index:1; }
+@media(min-width:820px){.activities{grid-template-columns:repeat(3,1fr);}}
+.activity-card{ background:var(--white); border:1px solid var(--stone-200); padding:30px 26px; position:relative; transition:transform .25s ease, box-shadow .25s ease; }
+.activity-card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(13,31,22,0.12);}
+.rapid-class{ font-family:var(--mono);font-size:0.7rem;color:var(--river-500); letter-spacing:0.08em;margin-bottom:14px;display:block; }
+.activity-card h3{font-size:1.4rem;color:var(--forest-950);margin-bottom:10px;}
+.activity-card p{font-size:0.92rem;opacity:0.8;}
+.card-photo{display:block;margin:-30px -26px 20px;aspect-ratio:16/10;overflow:hidden;background:var(--forest-800);}
+.card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.activity-card:hover .card-photo img,.course-card:hover .card-photo img{transform:scale(1.05);}
+.course-card .card-photo{margin:-24px -22px 16px;}
+.card-more{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:0.78rem;font-weight:600;color:var(--river-500);border-bottom:1px solid currentColor;}
+.card-more::after{content:"";position:absolute;inset:0;}
+.activity-card:hover .card-more{color:var(--forest-600);}
+.course-card .card-more{color:var(--amber-500);}
+.course-card:hover .card-more{color:var(--amber-400);}
+.courses-head{margin:64px 0 24px;}
+.courses-head h3{font-size:1.6rem;color:var(--forest-950);margin-top:8px;}
+.courses{display:grid;gap:20px;grid-template-columns:1fr;position:relative;z-index:1;}
+@media(min-width:720px){.courses{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1000px){.courses{grid-template-columns:repeat(4,1fr);}}
+.course-card{position:relative;background:var(--forest-800);color:var(--white);padding:24px 22px;border-top:3px solid var(--amber-500);}
+.course-card h4{font-family:var(--display);font-weight:400;font-size:1.2rem;margin-bottom:6px;}
+.course-card p{font-size:0.85rem;color:var(--stone-200);opacity:0.85;}
+.activity-icon{width:38px;height:38px;margin-bottom:16px;color:var(--forest-600);}
+/* HISTORY */
+.history{ background:var(--forest-800); color:var(--white); }
+.history .container{ display:grid;gap:48px;grid-template-columns:1fr;align-items:center; }
+@media(min-width:900px){.history .container{grid-template-columns:0.9fr 1.1fr;}}
+.history-visual{ aspect-ratio:4/5; background:linear-gradient(160deg, rgba(46,125,140,0.4), rgba(13,31,22,0.8)), url('fotos/web/gopr3411.jpg') center/cover no-repeat; position:relative;overflow:hidden; }
+.history h2{color:var(--white);font-size:clamp(1.9rem,4vw,2.6rem);margin-top:10px;}
+.history p{margin-top:16px;color:var(--stone-200);opacity:0.9;}
+.history-year{font-family:var(--mono);font-size:5rem;color:var(--amber-500);opacity:0.9;line-height:1;}
+/* SAFETY */
+.trust-strip{display:grid;gap:24px;grid-template-columns:1fr;margin-top:48px;}
+@media(min-width:720px){.trust-strip{grid-template-columns:repeat(2,1fr);}}
+.trust-item{display:flex;align-items:center;gap:22px;background:var(--white);border:1px solid var(--stone-200);padding:20px 24px;transition:transform .2s ease;}
+.trust-item:hover{transform:translateY(-3px);}
+.trust-item img{height:84px;width:auto;flex-shrink:0;}
+.trust-item .eyebrow{display:block;margin-bottom:4px;}
+.trust-item strong{display:block;font-weight:600;color:var(--forest-950);}
+.trust-item span.txt{font-size:0.88rem;opacity:0.8;}
+/* SAFETY v2 */
+.safety-lead{max-width:640px;}
+.safety-grid{display:grid;gap:24px;grid-template-columns:1fr;}
+@media(min-width:720px){.safety-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+.safety-item{background:var(--white);border:1px solid var(--stone-200);border-top:3px solid var(--forest-600);display:flex;flex-direction:column;transition:transform .25s ease, box-shadow .25s ease;}
+.safety-item:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(13,31,22,0.10);}
+.safety-body{padding:20px 22px 24px;}
+.safety-num{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;color:var(--river-500);display:block;margin-bottom:8px;}
+.safety-logos{aspect-ratio:16/10;background:var(--white);border-bottom:1px solid var(--stone-200);display:grid;grid-template-columns:repeat(3,1fr);align-items:center;gap:14px;padding:18px;}
+.safety-logos a{display:flex;align-items:center;justify-content:center;height:100%;transition:transform .2s ease;}
+.safety-logos a:hover{transform:scale(1.06);}
+.safety-logos img{max-height:110px;width:auto;max-width:100%;object-fit:contain;}
+.safety-photo{aspect-ratio:16/10;overflow:hidden;}
+.safety-photo img{width:100%;height:100%;object-fit:cover;}
+.safety-item h3{font-size:1.1rem;color:var(--forest-950);margin-bottom:8px;font-family:var(--body);font-weight:600;}
+.safety-item p{font-size:0.9rem;opacity:0.8;}
+/* painel escuro: equipamento obrigatório + classificação do rio */
+.safety-panel{margin-top:40px;background:var(--forest-800);color:var(--stone-200);display:grid;grid-template-columns:1fr;}
+@media(min-width:900px){.safety-panel{grid-template-columns:1.05fr 0.95fr;}}
+.safety-panel > div{padding:36px 30px;}
+@media(min-width:900px){.safety-panel > div + div{border-left:1px solid rgba(253,250,244,0.12);}}
+@media(max-width:899px){.safety-panel > div + div{border-top:1px solid rgba(253,250,244,0.12);}}
+.safety-panel .eyebrow{color:var(--river-300);}
+.safety-panel h3{font-size:1.6rem;color:var(--white);margin:8px 0 6px;}
+.panel-sub{font-size:0.88rem;opacity:0.8;margin-bottom:22px;}
+.gear-group + .gear-group{margin-top:22px;}
+.gear-group h4{font-family:var(--mono);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber-500);margin-bottom:10px;}
+.gear-list{display:flex;flex-wrap:wrap;gap:8px;list-style:none;}
+.gear-list li{font-size:0.82rem;padding:6px 12px;border:1px solid rgba(253,250,244,0.22);border-radius:999px;color:var(--white);}
+.gear-list li.req{background:var(--amber-500);border-color:var(--amber-500);color:var(--forest-950);font-weight:600;}
+.gear-note{font-size:0.8rem;opacity:0.75;margin-top:10px;}
+.gear-legend{display:flex;align-items:center;gap:8px;font-size:0.78rem;opacity:0.85;margin-top:22px;}
+.gear-legend i{width:12px;height:12px;border-radius:50%;background:var(--amber-500);display:inline-block;}
+.river-scale{list-style:none;display:grid;gap:6px;}
+.river-scale li{display:grid;grid-template-columns:44px 1fr;align-items:center;gap:12px;font-size:0.85rem;}
+.river-scale .cls{font-family:var(--mono);font-weight:600;font-size:0.95rem;text-align:center;padding:7px 0;border-radius:2px;color:var(--forest-950);}
+.river-scale .c1{background:#9fd3b0;} .river-scale .c2{background:#7fc4cf;} .river-scale .c3{background:#f0bd5f;}
+.river-scale .c4{background:#e2873d;} .river-scale .c5{background:#c4553a;color:var(--white);} .river-scale .c6{background:#7a2a22;color:var(--white);}
+.river-scale li.off{opacity:0.55;}
+.river-scale li.off span:last-child{text-decoration:line-through;text-decoration-thickness:1px;}
+.river-tag{display:inline-block;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.06em;margin-left:6px;padding:2px 6px;border:1px solid var(--amber-500);color:var(--amber-500);border-radius:2px;vertical-align:middle;}
+.river-note{font-size:0.8rem;opacity:0.75;margin-top:16px;}
+/* política: compromissos */
+.policy{margin-top:56px;}
+.policy-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:22px;}
+.policy-head h3{font-size:1.6rem;color:var(--forest-950);margin-top:8px;}
+.policy-head p{max-width:46ch;font-size:0.9rem;opacity:0.8;}
+.policy-grid{display:grid;gap:0;grid-template-columns:1fr;border-top:1px solid var(--stone-200);}
+@media(min-width:720px){.policy-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1000px){.policy-grid{grid-template-columns:repeat(3,1fr);}}
+.policy-item{padding:20px 20px 20px 0;border-bottom:1px solid var(--stone-200);display:grid;grid-template-columns:36px 1fr;gap:6px;}
+.policy-item .n{font-family:var(--mono);font-weight:600;color:var(--amber-500);font-size:0.95rem;}
+.policy-item h4{font-family:var(--body);font-weight:600;font-size:0.98rem;color:var(--forest-950);margin-bottom:4px;}
+.policy-item p{font-size:0.85rem;opacity:0.8;}
+.trust-strip{margin-top:40px;}
+/* planejamento + certificação */
+.safety-duo{margin-top:40px;display:grid;gap:24px;grid-template-columns:1fr;}
+@media(min-width:900px){.safety-duo{grid-template-columns:1fr 1fr;}}
+.duo-card{background:var(--white);border:1px solid var(--stone-200);padding:30px 28px;}
+.duo-card h3{font-size:1.5rem;color:var(--forest-950);margin:8px 0 6px;}
+.duo-card > p{font-size:0.88rem;opacity:0.8;}
+.plan-list{list-style:none;margin-top:18px;display:grid;gap:10px;}
+.plan-list li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:0.9rem;align-items:start;}
+.plan-list svg{width:20px;height:20px;color:var(--forest-600);margin-top:1px;}
+.norms{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 18px;}
+.norms span{font-family:var(--mono);font-size:0.74rem;font-weight:600;padding:5px 9px;background:var(--stone-100);border:1px solid var(--stone-200);color:var(--forest-800);}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px;}
+.steps div{border-left:3px solid var(--river-500);padding:4px 0 4px 12px;font-size:0.84rem;}
+.steps strong{display:block;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--river-500);margin-bottom:2px;}
+/* CTA FOOTER */
+.cta-band{ background:var(--amber-500); padding:70px 0; text-align:center; }
+.cta-band h2{color:var(--forest-950);font-size:clamp(1.8rem,4vw,2.6rem);}
+.cta-band p{margin-top:12px;color:var(--forest-950);opacity:0.85;}
+.cta-band .hero-actions{justify-content:center;margin-top:30px;}
+.cta-band .btn-primary{background:var(--forest-950);color:var(--white);} .cta-band .btn-primary:hover{background:var(--forest-800);}
+/* PARCEIROS */
+.partners-grid{display:grid;gap:24px;grid-template-columns:1fr;}
+@media(min-width:720px){.partners-grid{grid-template-columns:repeat(3,1fr);}}
+.partner-card{ display:block;background:var(--white);border:1px solid var(--stone-200); padding:26px;position:relative;transition:transform .2s ease; }
+.partner-card:hover{transform:translateY(-4px);}
+.partner-card.featured{ border-color:var(--amber-500); box-shadow:0 12px 30px rgba(226,165,61,0.18); }
+.partner-badge{ display:inline-block;font-family:var(--mono);font-size:0.68rem; letter-spacing:0.08em;text-transform:uppercase; background:var(--amber-500);color:var(--forest-950); padding:4px 10px;margin-bottom:14px; }
+.partner-card h3{font-size:1.15rem;color:var(--forest-950);margin-bottom:8px;font-family:var(--body);font-weight:600;}
+.partner-card p{font-size:0.9rem;opacity:0.75;}
+.partner-card.placeholder{border-style:dashed;opacity:0.55;}
+footer{background:var(--forest-950);color:var(--stone-200);padding:56px 0 28px;}
+.footer-grid{display:grid;gap:32px;grid-template-columns:1fr;margin-bottom:40px;}
+@media(min-width:720px){.footer-grid{grid-template-columns:1.4fr 1fr 1fr;}}
+footer h4{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber-500);margin-bottom:14px;}
+footer p, footer a{font-size:0.9rem;opacity:0.85;} footer ul{list-style:none;} footer li{margin-bottom:8px;}
+.footer-bottom{border-top:1px solid rgba(253,250,244,0.1);padding-top:22px;font-size:0.78rem;opacity:0.55;font-family:var(--mono);}
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease;}
+[data-reveal].in{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){ [data-reveal]{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+<header id="siteHeader">
+<div class="container">
+<nav>
+<a class="logo" href="index.html"><img src="logo-lumiar-aventura.png" alt="Lumiar Aventura"></a>
+<div class="nav-links">
+<a href="#atividades">Atividades</a>
+<a href="precos.php">Preços</a>
+<a href="profissionais.html">Profissionais</a>
+<a href="#historia">Nossa História</a>
+<a href="#seguranca">Segurança</a>
+<a href="como-chegar.html">Como Chegar</a>
+<a href="#contato">Contato</a>
+<a href="https://instagram.com/lumiaraventura" target="_blank" rel="noopener">@lumiaraventura</a>
+</div>
+<a class="btn btn-primary nav-cta" href="#contato">Reservar</a>
+</nav>
+</div>
+</header>
+<div class="hero-scroll" id="heroScroll">
+<section class="hero">
+<canvas class="hero-seq" id="heroSeq" aria-hidden="true"></canvas>
+<div class="hero-shade"></div>
+<svg class="hero-contours" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<path d="M-50,600 C200,520 350,680 600,560 C850,440 1000,600 1250,500" stroke="#245c40" stroke-width="1.5" fill="none" opacity="0.5"/>
+<path d="M-50,660 C220,590 380,730 620,620 C860,500 1010,650 1250,560" stroke="#245c40" stroke-width="1.5" fill="none" opacity="0.4"/>
+<path d="M-50,720 C240,660 400,780 640,680 C870,570 1020,700 1250,620" stroke="#245c40" stroke-width="1.5" fill="none" opacity="0.3"/>
+</svg>
+<svg class="hero-river" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<path id="heroRiverPath" d="M100,-20 C260,120 40,260 220,400 C400,540 180,640 340,820" stroke="#7fc4cf" stroke-width="2.5" fill="none" opacity="0.55" stroke-dasharray="6 10"/>
+</svg>
+<div class="hero-inner container">
+<div class="hero-tag"><span class="line"></span><span class="eyebrow" style="color:var(--river-300)">Lumiar · Nova Friburgo · RJ · desde 1990</span></div>
+<h1>35 anos guiando gente <em>rio abaixo</em> e <em>trilha afora</em>.</h1>
+<p>Rafting, canoagem, rapel, trekking, arvorismo-canopy e cachoeirismo na Serra Fluminense — com a equipe mais experiente da região e equipamentos certificados em cada descida.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#contato">Reservar pelo WhatsApp</a>
+<a class="btn btn-ghost" href="#atividades">Ver atividades</a>
+</div>
+</div>
+</section>
+<div class="hero-track"></div>
+</div>
+<div class="stats">
+<div class="container stats-grid">
+<div class="stat" data-reveal><div class="num">35</div><div class="label">anos de estrada</div></div>
+<div class="stat" data-reveal><div class="num">7</div><div class="label">modalidades de aventura</div></div>
+<div class="stat" data-reveal><div class="num">I—IV</div><div class="label">classes de corredeira</div></div>
+<div class="stat" data-reveal><div class="num">74+</div><div class="label">avaliações no TripAdvisor</div></div>
+</div>
+</div>
+<section class="section river-path-wrap" id="atividades">
+<div class="container">
+<div class="section-head" data-reveal>
+<span class="eyebrow">O que oferecemos</span>
+<h2>Aventura sob medida para cada perfil.</h2>
+<p>Do primeiro rapel em família à corredeira classe IV para quem já tem prática — cada atividade tem seu próprio nível, equipamento e guia dedicado.</p>
+</div>
+<div class="activities">
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/rafting.webp" alt="Rafting" loading="lazy"></div>
+<span class="rapid-class">CLASSE I—IV</span>
+<h3>Rafting</h3>
+<p>Três percursos no rio, com distância, duração e dificuldade diferentes — para grupos e famílias.</p>
+<a class="card-more" href="rafting.html">Ver percursos →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/canoagem.webp" alt="Canoagem" loading="lazy"></div>
+<span class="rapid-class">INFLÁVEIS</span>
+<h3>Canoagem</h3>
+<p>Remada em caiaques infláveis pelo rio, ótima porta de entrada para quem nunca praticou esporte de aventura.</p>
+<a class="card-more" href="canoagem.html">Ver percursos →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/rapel.webp" alt="Rapel" loading="lazy"></div>
+<span class="rapid-class">TÉCNICO</span>
+<h3>Rapel</h3>
+<p>Descidas guiadas em cachoeiras e paredões, com equipamento certificado IRF/CBCa/INMETRO.</p>
+<a class="card-more" href="rapel.html">Ver roteiros →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/trekking.webp" alt="Trekking" loading="lazy"></div>
+<span class="rapid-class">MATA FECHADA</span>
+<h3>Trekking</h3>
+<p>Trilhas guiadas pela Serra, incluindo rotas até cachoeiras escondidas da região.</p>
+<a class="card-more" href="trekking.html">Ver trilhas →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/arvorismo.webp" alt="Arvorismo-Canopy no Refúgio Eco Lodge" loading="lazy"></div>
+<span class="rapid-class">ALTURA</span>
+<h3>Arvorismo-Canopy</h3>
+<p>Percurso entre as árvores com tirolesas e obstáculos suspensos, no Refúgio Eco Lodge, integrado à natureza.</p>
+<a class="card-more" href="arvorismo.html">Ver circuito →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/cachoeirismo.webp" alt="Cachoeirismo" loading="lazy"></div>
+<span class="rapid-class">QUEDAS D'ÁGUA</span>
+<h3>Cachoeirismo</h3>
+<p>Descida pelo leito das cachoeiras da região com corda e equipamento de segurança, acompanhada por guias.</p>
+<a class="card-more" href="cachoeirismo.html">Ver roteiro →</a>
+</div>
+<div class="activity-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/empresarial.webp" alt="Treinamento Empresarial" loading="lazy"></div>
+<span class="rapid-class">EMPRESAS</span>
+<h3>Treinamento Empresarial</h3>
+<p>Programas ao ar livre para equipes, usando as atividades de aventura para trabalhar liderança e cooperação.</p>
+<a class="card-more" href="treinamento-empresarial.html">Ver programa →</a>
+</div>
+</div>
+<div class="courses-head" id="cursos" data-reveal>
+<span class="eyebrow">Formação técnica</span>
+<h3>Cursos</h3>
+</div>
+<div class="courses">
+<div class="course-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/curso-condutor.webp" alt="Curso de Condutor de Rafting" loading="lazy"></div>
+<h4>Condutor de Rafting</h4>
+<p>Formação para conduzir botes de rafting em corredeiras.</p>
+<a class="card-more" href="curso-condutor-de-rafting.html">Ver curso →</a>
+</div>
+<div class="course-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/curso-resgate.webp" alt="Curso de Resgate em Corredeiras" loading="lazy"></div>
+<h4>Resgate em Corredeiras</h4>
+<p>Técnicas de resgate e segurança em águas rápidas.</p>
+<a class="card-more" href="curso-resgate-em-corredeiras.html">Ver curso →</a>
+</div>
+<div class="course-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/curso-canoagem.webp" alt="Curso de Canoagem" loading="lazy"></div>
+<h4>Canoagem</h4>
+<p>Fundamentos de remada e navegação em rio.</p>
+<a class="card-more" href="curso-canoagem.html">Ver curso →</a>
+</div>
+<div class="course-card" data-reveal>
+<div class="card-photo"><img src="fotos/web/cards/curso-verticais.webp" alt="Curso de Técnicas Verticais" loading="lazy"></div>
+<h4>Técnicas Verticais</h4>
+<p>Cordas, ancoragens e progressão para rapel e cachoeirismo.</p>
+<a class="card-more" href="curso-tecnicas-verticais.html">Ver curso →</a>
+</div>
+</div>
+</div>
+</section>
+<section class="history" id="historia">
+<div class="container">
+<div class="history-visual" data-reveal>
+<svg viewBox="0 0 400 500" style="position:absolute;inset:0;width:100%;height:100%;">
+<path d="M0,120 C90,180 40,260 140,300 C240,340 180,420 260,500" stroke="#f0bd5f" stroke-width="2" fill="none" opacity="0.5"/>
+<path d="M-20,60 C70,140 20,220 120,260" stroke="#7fc4cf" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>
+</div>
+<div data-reveal>
+<span class="eyebrow" style="color:var(--river-300)">Nossa história</span>
+<div class="history-year">1990</div>
+<h2>Pioneiros do turismo de aventura na Serra Fluminense.</h2>
+<p>A Lumiar Aventura nasceu junto com o próprio turismo de aventura na região — décadas antes de "ecoturismo" virar palavra da moda. Hoje somos guiados pela mesma regra do primeiro dia: ninguém desce o rio sem que a equipe conheça cada corredeira de cor.</p>
+<p>Nossa equipe reúne guias certificados e moradores locais que cresceram entre essas cachoeiras — a experiência de quem vive a Serra, não só trabalha nela.</p>
+</div>
+</div>
+</section>
+<section class="section" id="seguranca">
+<div class="container">
+<div class="section-head safety-lead" data-reveal>
+<span class="eyebrow">Segurança em primeiro lugar</span>
+<h2>Aventura de verdade não abre mão de preparo.</h2>
+<p>Nossa política é de melhoria contínua: condutores e gestores focados na máxima segurança possível, monitoramento constante, decisões simples seguidas de ação imediata e conduta consciente na natureza.</p>
+</div>
+<div class="safety-grid">
+<div class="safety-item" data-reveal>
+<div class="safety-logos">
+<a href="https://internationalrafting.com/" target="_blank" rel="noopener" title="International Rafting Federation"><img src="fotos/web/logos/irf.png" alt="IRF — International Rafting Federation" loading="lazy"></a>
+<a href="https://canoagem.org.br/" target="_blank" rel="noopener" title="Confederação Brasileira de Canoagem"><img src="fotos/web/logos/cbca.png" alt="CBCa — Confederação Brasileira de Canoagem" loading="lazy"></a>
+<a href="https://www.gov.br/inmetro/pt-br" target="_blank" rel="noopener" title="INMETRO"><img src="fotos/web/logos/inmetro.png" alt="INMETRO" loading="lazy"></a>
+</div>
+<div class="safety-body">
+<span class="safety-num">01</span>
+<h3>Equipamentos certificados</h3>
+<p>Rafting e duck seguem especificações IRF, CBCa e INMETRO; técnicas verticais, UIAA. Tudo é lavado, higienizado e revisado após cada atividade.</p>
+</div>
+</div>
+<div class="safety-item" data-reveal>
+<div class="safety-photo"><img src="fotos/web/cards/seg-resgate.webp" alt="Kit de resgate e primeiros socorros" loading="lazy"></div>
+<div class="safety-body">
+<span class="safety-num">02</span>
+<h3>Kit de resgate e equipe socorrista</h3>
+<p>Toda saída leva kit de primeiros socorros e de resgate especializado. Toda a equipe é formada socorrista (Suporte Básico à Vida, RCP e desfibrilador) com o Rio Emergências.</p>
+</div>
+</div>
+<div class="safety-item" data-reveal>
+<div class="safety-photo"><img src="fotos/web/cards/seg-proporcao.webp" alt="Proporção guia/participante" loading="lazy"></div>
+<div class="safety-body">
+<span class="safety-num">03</span>
+<h3>Proporção guia/participante</h3>
+<p>Cada percurso define um limite claro de participantes por guia — a segurança não é negociável pelo volume do grupo.</p>
+</div>
+</div>
+</div>
+
+<div class="safety-panel" data-reveal>
+<div>
+<span class="eyebrow">O que você vai usar</span>
+<h3>Equipamento de segurança</h3>
+<p class="panel-sub">Adequado ao tamanho e ao volume de água de cada rio.</p>
+<div class="gear-group">
+<h4>Rafting e duck</h4>
+<ul class="gear-list"><li class="req">Capacete</li><li class="req">Colete</li><li class="req">Calçado com sola de borracha</li><li>Remo (também ferramenta de resgate)</li><li>Duck para 2, sempre com condutor</li></ul>
+</div>
+<div class="gear-group">
+<h4>Técnicas verticais</h4>
+<ul class="gear-list"><li class="req">Capacete</li><li class="req">Cadeirinha</li><li class="req">Calçado com sola de borracha</li><li>Cordas com alma</li><li>Mosquetões de aço e alumínio</li><li>Fitas de ancoragem</li><li>Freio 8 ou blocante</li><li>Luvas</li></ul>
+</div>
+<div class="gear-legend"><i></i> Obrigatório para participar</div>
+</div>
+<div>
+<span class="eyebrow">Classificação do rio</span>
+<h3>Seis níveis de corredeira</h3>
+<p class="panel-sub">Definidos pela geologia, declividade, traçado e volume de água. Nossos percursos vão da classe I à IV.</p>
+<ul class="river-scale">
+<li><span class="cls c1">I</span><span>Iniciantes</span></li>
+<li><span class="cls c2">II</span><span>Iniciantes</span></li>
+<li><span class="cls c3">III</span><span>Iniciantes e intermediários</span></li>
+<li><span class="cls c4">IV</span><span>Somente pessoas experientes</span></li>
+<li class="off"><span class="cls c5">V</span><span>Só competição, não turístico</span></li>
+<li class="off"><span class="cls c6">VI</span><span>Não indicado para descida</span></li>
+</ul>
+<p class="river-note">O nível da água no dia pode subir ou baixar a dificuldade. Os sinais (+) e (−) dão precisão: IV(+) fica entre as classes IV e V.</p>
+</div>
+</div>
+
+<div class="safety-duo">
+<div class="duo-card" data-reveal>
+<span class="eyebrow">Antes de sair</span>
+<h3>Como planejamos cada roteiro</h3>
+<p>Condutores com experiência no local, treino prático e teórico no roteiro, primeiros socorros e formação de Condutor de Turismo de Aventura.</p>
+<ul class="plan-list">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Tipo de atividade e conhecimento profundo do local</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Monitoramento das condições do tempo</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Análise prévia do perfil do grupo</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Equipe treinada e qualificada</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Equipamentos revisados e renovados</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Plano de resgate e emergência</li>
+</ul>
+</div>
+<div class="duo-card" data-reveal>
+<span class="eyebrow">Certificação</span>
+<h3>Normas ABNT e INMETRO</h3>
+<p>Participamos do programa Aventura Segura (Ministério do Turismo, ABETA e SEBRAE) e operamos conforme as normas técnicas de turismo de aventura.</p>
+<div class="norms"><span>NBR 15286</span><span>NBR 15331</span><span>NBR 15370</span><span>NBR 15398</span><span>NBR 15400</span><span>NBR 15505-1</span><span>NBR 15505-2</span></div>
+<div class="steps">
+<div><strong>Antes do passeio</strong>Você recebe as informações e assina o termo de conhecimento de riscos.</div>
+<div><strong>Depois do passeio</strong>Você avalia o serviço no nosso opinário.</div>
+</div>
+</div>
+</div>
+
+<div class="policy">
+<div class="policy-head" data-reveal>
+<div><span class="eyebrow">Política de segurança</span><h3>Nossos compromissos</h3></div>
+</div>
+<div class="policy-grid">
+<div class="policy-item" data-reveal><span class="n">01</span><div><h4>Segurança das pessoas</h4><p>Reduzir riscos à vida e preservar a integridade física e mental de todos.</p></div></div>
+<div class="policy-item" data-reveal><span class="n">02</span><div><h4>Qualidade do serviço</h4><p>Melhoria contínua, com padrão ético, profissional e decisões precisas.</p></div></div>
+<div class="policy-item" data-reveal><span class="n">03</span><div><h4>Conformidade legal</h4><p>Leis ambientais, normas da atividade e defesa do consumidor, com retorno à comunidade local.</p></div></div>
+<div class="policy-item" data-reveal><span class="n">04</span><div><h4>Uso sustentável</h4><p>Recursos naturais usados com responsabilidade e treino técnico para preservar o bioma.</p></div></div>
+<div class="policy-item" data-reveal><span class="n">05</span><div><h4>Monitoramento</h4><p>Acompanhamento contínuo das atividades, com metas para aprimorar a gestão da segurança.</p></div></div>
+<div class="policy-item" data-reveal><span class="n">06</span><div><h4>Regras de visitação</h4><p>Seguimos o regulamento do INEA para a APA Macaé de Cima, com conduta de mínimo impacto.</p></div></div>
+</div>
+</div>
+
+<div class="trust-strip">
+<a class="trust-item" href="https://seguroecotrip.com.br/site/" target="_blank" rel="noopener" data-reveal>
+<img src="fotos/web/logos/ecotrip.png" alt="Eco Trip" loading="lazy">
+<div><span class="eyebrow">Nossos clientes têm seguro</span><strong>Eco Trip</strong><span class="txt">Seguro e gerenciamento de riscos para turismo de aventura.</span></div>
+</a>
+<a class="trust-item" href="https://abeta.tur.br/programa-aventura-segura/" target="_blank" rel="noopener" data-reveal>
+<img src="fotos/web/logos/aventura-segura.jpg" alt="Programa Aventura Segura" loading="lazy">
+<div><span class="eyebrow">Participamos do programa</span><strong>Aventura Segura</strong><span class="txt">Programa de qualificação e certificação em turismo de aventura (ABETA).</span></div>
+</a>
+</div>
+</div>
+</section>
+<section class="section" id="parceiros">
+<div class="container">
+<div class="section-head" data-reveal>
+<span class="eyebrow">Quem indicamos por perto</span>
+<h2>Parceiros para completar sua estadia em Lumiar.</h2>
+<p>Hospedagem, restaurantes e passeios recomendados pela nossa equipe — ideal pra fechar o roteiro completo da sua aventura.</p>
+</div>
+<div class="partners-grid">
+<a href="jeep-cachoeiras.html" class="partner-card featured" data-reveal>
+<span class="partner-badge">Parceiro em destaque</span>
+<h3>Amilson — Passeios 4x4</h3>
+<p>Passeio de Jeep pelas cachoeiras da região — parceria recomendada pela nossa equipe para quem quer completar a aventura fora do rio. Ver roteiro completo →</p>
+</a>
+<div class="partner-card placeholder" data-reveal>
+<h3>Hospedagem parceira</h3>
+<p>A preencher — pousada ou hotel recomendado próximo à base de operações.</p>
+</div>
+<div class="partner-card placeholder" data-reveal>
+<h3>Restaurante parceiro</h3>
+<p>A preencher — indicação de restaurante ou bar da região.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="cta-band" id="contato">
+<div class="container">
+<h2 data-reveal>Pronto pra descer o rio com a gente?</h2>
+<p data-reveal>Fale com a equipe pelo WhatsApp e monte seu roteiro de aventura em Lumiar.</p>
+<div class="hero-actions" data-reveal>
+<a class="btn btn-primary" href="https://wa.me/5522981316768" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+<a class="btn btn-ghost" style="border-color:rgba(13,31,22,0.3);color:var(--forest-950);" href="mailto:lumiaraventura@gmail.com">Enviar e-mail</a>
+</div>
+</div>
+</div>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<h4>Lumiar Aventura</h4>
+<p>R. Pref. Amâncio Mario de Azevedo, s/n — Lago<br>Lumiar, Nova Friburgo — RJ, 28616-970<br><a href="como-chegar.html">Como chegar →</a><br>Turismo de aventura desde 1990.</p>
+</div>
+<div>
+<h4>Atividades</h4>
+<ul>
+<li><a href="#atividades">Rafting</a></li>
+<li><a href="#atividades">Canoagem</a></li>
+<li><a href="#atividades">Rapel</a></li>
+<li><a href="#atividades">Trekking</a></li>
+<li><a href="#atividades">Arvorismo-Canopy</a></li>
+<li><a href="#atividades">Cachoeirismo</a></li>
+<li><a href="#atividades">Treinamento Empresarial</a></li>
+</ul>
+</div>
+<div>
+<h4>Contato</h4>
+<ul>
+<li><a href="https://wa.me/5522981316768" target="_blank" rel="noopener">(22) 98131-6768</a></li>
+<li><a href="mailto:lumiaraventura@gmail.com">lumiaraventura@gmail.com</a></li>
+<li><a href="https://instagram.com/lumiaraventura" target="_blank" rel="noopener">@lumiaraventura</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">© 1990–2026 LUMIAR AVENTURA — PROJETO DE SITE EM DESENVOLVIMENTO (PÁGINA PILOTO)</div>
+</div>
+</footer>
+<script>
+// Header solid on scroll
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+header.classList.toggle('scrolled', window.scrollY > 40);
+});
+// Hero: vídeo da corredeira avança conforme o scroll (fotos/hero-frames, 56 quadros)
+(function(){
+const wrap = document.getElementById('heroScroll'), canvas = document.getElementById('heroSeq');
+if (!wrap || !canvas) return;
+const ctx = canvas.getContext('2d');
+const N = 56, src = i => 'fotos/hero-frames/' + String(i + 1).padStart(4, '0') + '.webp';
+const imgs = new Array(N).fill(null);
+let target = 0, current = 0, raf = 0, next = 0;
+const order = [0, N - 1];
+for (const step of [16, 8, 4, 2, 1]) for (let i = 0; i < N; i += step) if (!order.includes(i)) order.push(i);
+function loadMore(){
+if (next >= order.length) return;
+const i = order[next++], im = new Image();
+im.onload = () => { if (i === 0 || Math.abs(i - Math.round(current)) < 3) draw(); loadMore(); };
+im.onerror = loadMore;
+im.src = src(i); imgs[i] = im;
+}
+for (let k = 0; k < 4; k++) loadMore();
+function nearest(i){
+for (let d = 0; d < N; d++) for (const j of [i - d, i + d]) { const im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; }
+return null;
+}
+function draw(){
+current += (target - current) * 0.18;
+if (Math.abs(target - current) < 0.01) current = target;
+const img = nearest(Math.round(current));
+if (img) {
+const W = canvas.width, H = canvas.height, s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+const w = img.naturalWidth * s, h = img.naturalHeight * s;
+ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+}
+raf = current !== target ? requestAnimationFrame(draw) : 0;
+}
+function size(){
+const dpr = Math.min(2, window.devicePixelRatio || 1);
+canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr;
+draw();
+}
+function onScroll(){
+const r = wrap.getBoundingClientRect(), span = r.height - window.innerHeight;
+target = Math.min(1, Math.max(0, -r.top / span)) * (N - 1);
+if (!raf) raf = requestAnimationFrame(draw);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', size);
+size(); onScroll();
+})();
+// Reveal on scroll
+const revealEls = document.querySelectorAll('[data-reveal]');
+const io = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('in');
+io.unobserve(entry.target);
+}
+});
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

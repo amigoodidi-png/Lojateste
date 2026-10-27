@@ -1,0 +1,12 @@
+# Cópias de segurança feitas antes de cada mudança
+*.bak-*
+*.bak
+# Rascunhos temporários
+_acervo_tmp/
+# Senhas e chaves NUNCA vão para cá: ficam em C:\Bases (local) ou htdocs/_privado (hospedagem)
+_privado/
+*config*.php
+!loja/_config.php
+*.env
+# Arquivos de banco com custos de fornecedor: ficam só no computador (repositório público)
+loja/*.sql
