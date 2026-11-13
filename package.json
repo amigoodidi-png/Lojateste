@@ -13,7 +13,8 @@
     "db:exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --exemplos",
     "db:limpar-exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --limpar-exemplos",
     "tipos": "tsc --noEmit",
-    "admin:criar": "tsx --env-file-if-exists=.env.local scripts/criar-admin.ts"
+    "admin:criar": "tsx --env-file-if-exists=.env.local scripts/criar-admin.ts",
+    "testar": "tsx --conditions=react-server scripts/testar-importacao.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.4",

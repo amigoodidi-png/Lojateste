@@ -27,7 +27,8 @@ export const statusIntegracao = pgEnum("status_integracao", [
   "indisponivel",
 ]);
 export const statusProduto = pgEnum("status_produto", ["rascunho", "ativo", "inativo", "indisponivel", "revisar_preco"]);
-export const statusImportacao = pgEnum("status_importacao", ["em_andamento", "concluida", "com_erros", "falhou"]);
+/** aguardando_confirmacao: prévia montada, nada gravado em produtos ainda. */
+export const statusImportacao = pgEnum("status_importacao", ["aguardando_confirmacao", "em_andamento", "concluida", "com_erros", "falhou", "cancelada"]);
 export const papelUsuario = pgEnum("papel_usuario", ["administrador", "editor", "colaborador"]);
 
 /** Programas de afiliados (Shopee, Mercado Livre, Temu e futuros). */
@@ -137,12 +138,17 @@ export const historicoPrecos = pgTable(
   (t) => [index("historico_precos_produto_idx").on(t.produtoId, t.registradoEm)],
 );
 
+/** Cada lote importado (planilha ou API). Primeiro vira prévia; só grava produtos depois da confirmação. */
 export const importacoes = pgTable("importacoes", {
   id: serial("id").primaryKey(),
-  plataformaId: integer("plataforma_id").notNull().references(() => plataformas.id),
+  /** Loja do lote. Fica vazio quando a planilha mistura lojas. */
+  plataformaId: integer("plataforma_id").references(() => plataformas.id),
+  // Sem valor padrão novo de propósito: o Postgres não deixa usar um valor de enum na mesma transação em que ele foi criado.
   status: statusImportacao("status").notNull().default("em_andamento"),
   /** "api" ou "planilha" */
   tipo: text("tipo").notNull(),
+  /** Nome do arquivo enviado ou a busca feita na API. */
+  descricao: text("descricao"),
   iniciadaEm: timestamp("iniciada_em", { withTimezone: true }).notNull().defaultNow(),
   concluidaEm: timestamp("concluida_em", { withTimezone: true }),
   totalNovos: integer("total_novos").notNull().default(0),
@@ -152,14 +158,23 @@ export const importacoes = pgTable("importacoes", {
   usuarioId: uuid("usuario_id"),
 });
 
-export const importacaoItens = pgTable("importacao_itens", {
-  id: serial("id").primaryKey(),
-  importacaoId: integer("importacao_id").notNull().references(() => importacoes.id, { onDelete: "cascade" }),
-  produtoId: integer("produto_id").references(() => produtos.id, { onDelete: "set null" }),
-  idNaPlataforma: text("id_na_plataforma"),
-  resultado: text("resultado").notNull(),
-  mensagem: text("mensagem"),
-});
+export const importacaoItens = pgTable(
+  "importacao_itens",
+  {
+    id: serial("id").primaryKey(),
+    importacaoId: integer("importacao_id").notNull().references(() => importacoes.id, { onDelete: "cascade" }),
+    /** Número da linha na planilha (1 = primeira linha de produto), ou posição no resultado da API. */
+    linha: integer("linha").notNull().default(0),
+    produtoId: integer("produto_id").references(() => produtos.id, { onDelete: "set null" }),
+    idNaPlataforma: text("id_na_plataforma"),
+    /** Na prévia: novo, atualizar, ignorar ou erro. Depois de confirmar: criado, atualizado, ignorado ou erro. */
+    resultado: text("resultado").notNull(),
+    mensagem: text("mensagem"),
+    /** Dados já conferidos da linha, usados para gravar o produto na confirmação. */
+    dados: jsonb("dados").$type<Record<string, unknown>>(),
+  },
+  (t) => [index("importacao_itens_importacao_idx").on(t.importacaoId, t.linha)],
+);
 
 /** Cada clique em COMPRAR AGORA. Clique não é venda. Não guardamos IP: só um hash anônimo diário. */
 export const cliques = pgTable(

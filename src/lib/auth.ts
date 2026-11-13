@@ -26,6 +26,7 @@ const PERMISSOES = {
   "produtos.editar": ["administrador", "editor", "colaborador"],
   "produtos.excluir": ["administrador", "editor"],
   "categorias.editar": ["administrador", "editor"],
+  "produtos.importar": ["administrador", "editor"],
   "usuarios.gerenciar": ["administrador"],
 } as const satisfies Record<string, readonly Papel[]>;
 export type Permissao = keyof typeof PERMISSOES;

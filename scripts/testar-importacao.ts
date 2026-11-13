@@ -1,0 +1,24 @@
+// Testes da importação (planilha e assinatura da Shopee). Rode: npm run testar
+import { assinar, lerLinkShopee, ofertaParaDados } from "../src/lib/importacao/shopee";
+import { lerCsv, lerLinhas, modeloCsv } from "../src/lib/importacao/planilha";
+import assert from "node:assert";
+const payload = '{"query":"{\\nbrandOffer{\\n    nodes{\\n        commissionRate\\n        offerName\\n    }\\n}\\n}"}';
+assert.equal(assinar("123456", 1577836800, payload, "demo"), "dc88d72feea70c80c52c3399751a7d34966763f51a7f056aa070a5e9df645412");
+assert.deepEqual(lerLinkShopee("https://shopee.com.br/Apple-Iphone-11-128GB-Local-Set-i.52377417.6309028319"), { shopId: "52377417", itemId: "6309028319" });
+const d = ofertaParaDados({ itemId: 1, productName: " X ", priceMin: "90", priceMax: "90", priceDiscountRate: 10, imageUrl: "https://a/b.jpg", productLink: "https://p", offerLink: "https://s.shopee/x", shopName: "", commissionRate: "0.1", sales: 1, periodEndTime: 0 }, 1);
+assert.equal(d.precoAnterior, "100.00"); assert.equal(d.precoAtual, "90.00");
+const ref = { plataformas: [{ id: 1, slug: "shopee", nome: "Shopee" }, { id: 2, slug: "mercado-livre", nome: "Mercado Livre" }], categorias: [{ id: 5, slug: "casa", nome: "Casa e Cozinha", paiId: null }, { id: 6, slug: "org", nome: "Organização", paiId: 5 }] };
+const csv = 'Nome;Loja;Link de afiliado;Preço;Preço anterior;Código;Imagens;Categoria;Subcategoria\n"Pote; hermético ""top""";mercado livre;https://ml/x;"1.234,50";100;MLB1;https://i/1.jpg|https://i/2.jpg;casa e cozinha;organizacao\nXY;Temu;;;;;;;\nOutro;Shopee;nao-url;;;;;;\nBom;Shopee;https://s/1;10,00;;;;Inexistente;\n';
+const r = lerLinhas(lerCsv(csv), ref);
+assert.equal(r.erroGeral, undefined);
+const [a, b, c, e] = r.itens;
+assert.equal(a.dados?.nome, 'Pote; hermético "top"'); assert.equal(a.dados?.plataformaId, 2); assert.equal(a.dados?.precoAtual, "1234.50");
+assert.equal(a.dados?.precoAnterior, null); assert.equal(a.dados?.imagens.length, 2); assert.equal(a.dados?.categoriaId, 5); assert.equal(a.dados?.subcategoriaId, 6);
+assert.ok(a.avisos.some((x) => x.includes("sem desconto")));
+assert.ok(b.erro?.includes("Sem nome") || b.erro?.includes("Temu"), b.erro);
+assert.ok(c.erro?.includes("Link de afiliado"));
+assert.ok(e.avisos[0].includes("Inexistente")); assert.equal(e.dados?.categoriaId, null);
+assert.equal(lerLinhas(lerCsv("produto,preco\nAbc,1"), ref).erroGeral?.includes("loja"), true);
+assert.equal(lerLinhas(lerCsv("produto,preco\nAbcd,1"), ref, 1).itens[0].dados?.plataformaId, 1);
+const m = lerLinhas(lerCsv(modeloCsv()), ref); assert.equal(m.itens.length, 1); assert.ok(m.itens[0].dados, JSON.stringify(m.itens[0]));
+console.log("unit ok", m.itens[0].avisos);

@@ -55,6 +55,7 @@ No dia a dia, basta abrir o Docker Desktop, rodar `npx supabase start` e depois 
 | `npm run db:gerar` | Cria uma migração nova depois de mudar `src/db/schema.ts` |
 | `npm run db:semear` | Cadastra plataformas e categorias iniciais |
 | `npm run db:exemplos` / `db:limpar-exemplos` | Cria / apaga produtos de exemplo |
+| `npm run testar` | Roda os testes da importação (leitura de planilha e assinatura da Shopee) |
 | `npm run admin:criar -- email "Nome" [papel]` | Cria um usuário do painel ou troca a senha dele. Papéis: administrador, editor, colaborador |
 
 ## Painel administrativo (/admin)
@@ -63,7 +64,18 @@ No dia a dia, basta abrir o Docker Desktop, rodar `npx supabase start` e depois 
 - **Papéis:** administrador (tudo), editor (produtos e categorias, pode excluir) e colaborador (cadastra e edita produtos, não exclui nem mexe em categorias).
 - **Produtos:** adicionar, editar, duplicar, excluir, ativar e desativar (um por um ou em lote), destaque, preços, links, imagens, categoria e subcategoria, validade da oferta. O código do produto na loja evita cadastro duplicado. Toda mudança de preço vai para o histórico.
 - **Categorias:** criar, editar, ordenar, desativar e criar subcategorias (dois níveis).
+- **Importação de produtos:** por planilha CSV de qualquer loja (com modelo para baixar) ou pela API oficial da Shopee. Sempre mostra uma prévia linha a linha antes de gravar; produtos que já existem (mesmo código, mesmo link ou mesmo nome na loja) são atualizados em vez de duplicados. Tudo fica no histórico. Administrador e editor podem importar.
 - **Dashboard:** totais de produtos, cliques de hoje e do mês e atividade recente.
+
+## Shopee: importação pela API oficial
+
+A importação automática usa a **Shopee Affiliate Open API** (documentação no painel de afiliados, menu "Abrir API"). Ela só funciona depois que a Shopee libera o acesso para a sua conta de afiliado:
+
+1. Peça o acesso no formulário oficial: https://help.shopee.com.br/portal/webform/bbce78695c364ba18c9cbceb74ec9091
+2. Quando aprovado, copie o AppID e a Senha do menu "Abrir API" para o `.env.local` (`SHOPEE_APP_ID` e `SHOPEE_APP_SECRET`).
+3. Reinicie o site. A tela /admin/importacao/shopee passa a mostrar a busca.
+
+O código fica em `src/lib/importacao/shopee.ts`. Sem as chaves, o painel explica esses passos e a importação por planilha continua funcionando. Mercado Livre e Temu, por enquanto, só por planilha (não usamos robôs para copiar páginas).
 
 ## Estrutura
 
@@ -73,6 +85,7 @@ src/app/(painel)/   painel administrativo (/admin) e as ações que gravam no ba
 src/app/ir/[id]/    registro do clique + redirecionamento ao link de afiliado
 src/componentes/    cabeçalho, rodapé, cartão de produto, filtros, aviso de cookies
 src/lib/            consultas do catálogo, regras de preço e desconto
+src/lib/importacao/ leitura de planilhas, API da Shopee, prévia e gravação das importações
 src/db/schema.ts    tabelas do banco
 banco/migracoes/    migrações SQL geradas
 scripts/semear.ts   dados iniciais
