@@ -33,11 +33,15 @@ Você só faz isso uma vez.
    npm run db:exemplos
    ```
    Eles aparecem com "[EXEMPLO]" no nome. Para apagar: `npm run db:limpar-exemplos`.
-7. Abra o site:
+7. Crie o seu usuário do painel (a senha é pedida no terminal e não aparece na tela):
+   ```
+   npm run admin:criar -- seu@email.com "Seu Nome"
+   ```
+8. Abra o site:
    ```
    npm run dev
    ```
-   e acesse http://localhost:3000
+   e acesse http://localhost:3000 (site) ou http://localhost:3000/admin (painel).
 
 No dia a dia, basta abrir o Docker Desktop, rodar `npx supabase start` e depois `npm run dev`.
 
@@ -51,11 +55,21 @@ No dia a dia, basta abrir o Docker Desktop, rodar `npx supabase start` e depois 
 | `npm run db:gerar` | Cria uma migração nova depois de mudar `src/db/schema.ts` |
 | `npm run db:semear` | Cadastra plataformas e categorias iniciais |
 | `npm run db:exemplos` / `db:limpar-exemplos` | Cria / apaga produtos de exemplo |
+| `npm run admin:criar -- email "Nome" [papel]` | Cria um usuário do painel ou troca a senha dele. Papéis: administrador, editor, colaborador |
+
+## Painel administrativo (/admin)
+
+- **Login** com e-mail e senha. A senha é guardada com scrypt (nunca em texto), a sessão dura 7 dias e fica num cookie protegido. Depois de 5 senhas erradas em 15 minutos, o e-mail é bloqueado por 15 minutos.
+- **Papéis:** administrador (tudo), editor (produtos e categorias, pode excluir) e colaborador (cadastra e edita produtos, não exclui nem mexe em categorias).
+- **Produtos:** adicionar, editar, duplicar, excluir, ativar e desativar (um por um ou em lote), destaque, preços, links, imagens, categoria e subcategoria, validade da oferta. O código do produto na loja evita cadastro duplicado. Toda mudança de preço vai para o histórico.
+- **Categorias:** criar, editar, ordenar, desativar e criar subcategorias (dois níveis).
+- **Dashboard:** totais de produtos, cliques de hoje e do mês e atividade recente.
 
 ## Estrutura
 
 ```
-src/app/            páginas (início, produtos, categorias, ofertas, produto, páginas legais)
+src/app/(loja)/     páginas do site (início, produtos, categorias, ofertas, produto, páginas legais)
+src/app/(painel)/   painel administrativo (/admin) e as ações que gravam no banco
 src/app/ir/[id]/    registro do clique + redirecionamento ao link de afiliado
 src/componentes/    cabeçalho, rodapé, cartão de produto, filtros, aviso de cookies
 src/lib/            consultas do catálogo, regras de preço e desconto

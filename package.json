@@ -12,7 +12,8 @@
     "db:semear": "tsx --env-file-if-exists=.env.local scripts/semear.ts",
     "db:exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --exemplos",
     "db:limpar-exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --limpar-exemplos",
-    "tipos": "tsc --noEmit"
+    "tipos": "tsc --noEmit",
+    "admin:criar": "tsx --env-file-if-exists=.env.local scripts/criar-admin.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.4",
@@ -20,6 +21,7 @@
     "postgres": "^3.4.9",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {
