@@ -1,0 +1,37 @@
+{
+  "name": "olha-o-achado",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:gerar": "drizzle-kit generate",
+    "db:migrar": "drizzle-kit migrate",
+    "db:semear": "tsx --env-file-if-exists=.env.local scripts/semear.ts",
+    "db:exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --exemplos",
+    "db:limpar-exemplos": "tsx --env-file-if-exists=.env.local scripts/semear.ts --limpar-exemplos",
+    "tipos": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.4",
+    "next": "16.4.6",
+    "postgres": "^3.4.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
+}
