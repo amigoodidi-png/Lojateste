@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Identidade Olha o Achado (Etapa 2, aprovada em 13/11/2026) */
+:root {
+  --azul: #2e3cf0;
+  --azul-escuro: #1f2bc4;
+  --rosa: #ff4f8b;
+  --rosa-escuro: #e03572;
+  --tinta: #12143a;
+  --tinta-suave: #4a4d72;
+  --fundo: #f2f3ff;
+  --superficie: #ffffff;
+  --linha: #dfe1f5;
+  --sucesso: #13795b;
+  --alerta: #a35a00;
+}
+
+@theme inline {
+  --color-azul: var(--azul);
+  --color-azul-escuro: var(--azul-escuro);
+  --color-rosa: var(--rosa);
+  --color-rosa-escuro: var(--rosa-escuro);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-linha: var(--linha);
+  --color-sucesso: var(--sucesso);
+  --color-alerta: var(--alerta);
+  --font-display: var(--fonte-display), system-ui, sans-serif;
+  --font-sans: var(--fonte-texto), system-ui, sans-serif;
+  --radius-cartao: 6px;
+}
+
+html { scroll-padding-top: 8rem; }
+body {
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--fonte-texto), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--rosa); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+.container-site {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.texto-legal h2 { font-family: var(--fonte-display), system-ui, sans-serif; font-weight: 700; font-size: 1.15rem; margin-top: 2rem; margin-bottom: .5rem; }
+.texto-legal p, .texto-legal li { line-height: 1.7; color: var(--tinta-suave); max-width: 70ch; }
+.texto-legal ul { list-style: disc; padding-left: 1.25rem; display: grid; gap: .35rem; }
+.texto-legal p + p { margin-top: .75rem; }
