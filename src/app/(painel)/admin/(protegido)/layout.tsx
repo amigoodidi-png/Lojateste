@@ -8,7 +8,7 @@ const MENU: { href?: string; rotulo: string }[] = [
   { href: "/admin", rotulo: "Dashboard" },
   { href: "/admin/produtos", rotulo: "Produtos" },
   { href: "/admin/categorias", rotulo: "Categorias" },
-  { rotulo: "Importação de produtos" },
+  { href: "/admin/importacao", rotulo: "Importação de produtos" },
   { rotulo: "Plataformas de afiliados" },
   { rotulo: "Ofertas" },
   { rotulo: "Banners" },
@@ -32,7 +32,7 @@ export default function LayoutProtegido({ children }: { children: React.ReactNod
           <ul className="flex gap-1 md:flex-col">
             {MENU.map((m, i) => (
               <li key={m.rotulo} className="shrink-0">
-                {i === 3 ? <span className="hidden px-3 pt-4 pb-1 text-[10px] font-bold tracking-widest text-white/40 uppercase md:block">Próximas etapas</span> : null}
+                {i === 4 ? <span className="hidden px-3 pt-4 pb-1 text-[10px] font-bold tracking-widest text-white/40 uppercase md:block">Próximas etapas</span> : null}
                 {m.href ? (
                   <Link href={m.href} className="block rounded px-3 py-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-white">{m.rotulo}</Link>
                 ) : (
