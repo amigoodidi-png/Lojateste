@@ -219,15 +219,42 @@ export const banners = pgTable("banners", {
   criadoEm: criadoEm(),
 });
 
-/** Perfis do painel. O login em si fica no Supabase Auth; aqui ficam nome e papel. */
+/** Usuários do painel administrativo. */
 export const usuarios = pgTable("usuarios", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull().unique(),
   papel: papelUsuario("papel").notNull().default("colaborador"),
+  /** Senha com scrypt (salt:hash). Nunca guardamos a senha em texto. */
+  senhaHash: text("senha_hash"),
+  ultimoAcesso: timestamp("ultimo_acesso", { withTimezone: true }),
   ativo: boolean("ativo").notNull().default(true),
   criadoEm: criadoEm(),
 });
+
+/** Sessões do painel. Guardamos só o hash do token; o token fica no cookie httpOnly do navegador. */
+export const sessoes = pgTable(
+  "sessoes",
+  {
+    tokenHash: text("token_hash").primaryKey(),
+    usuarioId: uuid("usuario_id").notNull().references(() => usuarios.id, { onDelete: "cascade" }),
+    expiraEm: timestamp("expira_em", { withTimezone: true }).notNull(),
+    criadoEm: criadoEm(),
+  },
+  (t) => [index("sessoes_usuario_idx").on(t.usuarioId)],
+);
+
+/** Tentativas de login, para bloquear força bruta. */
+export const tentativasLogin = pgTable(
+  "tentativas_login",
+  {
+    id: serial("id").primaryKey(),
+    email: text("email").notNull(),
+    sucesso: boolean("sucesso").notNull(),
+    ocorridoEm: timestamp("ocorrido_em", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("tentativas_login_email_idx").on(t.email, t.ocorridoEm)],
+);
 
 export const logAtividades = pgTable(
   "log_atividades",
